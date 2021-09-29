@@ -13,7 +13,6 @@ var options = {
 
 let labels = []
 
-let arr_temperaturas = []
 let arr_temperaturasDS = []
 let arr_PH = []
 let arr_TDS = []
@@ -26,12 +25,6 @@ type: 'line',
 data: {
     labels: labels,
     datasets: [
-        {
-            label: "Temperatura do Ar",
-            backgroundColor: '#AAF',
-            borderColor: '#AAF',
-            data: arr_temperaturas
-        },
         {
             label: "Temperatura da Água",
             backgroundColor: '#50F',
@@ -117,8 +110,6 @@ function getDados(){
 
     var ultimaAtualizacao = ''
 
-    console.log(valores.length)
-
     valores.forEach(valor => {
         let ano = valor[0].substring(0, valor[0].indexOf('-'))
         let mes = valor[0].substring(valor[0].indexOf(ano) + 5, valor[0].indexOf(ano) + 7)
@@ -132,7 +123,6 @@ function getDados(){
             ultimaAtualizacao = data;
 
             labels.push(data)
-            arr_temperaturas.push(valor[1])
             arr_TDS.push(valor[2])
             arr_Condutividade.push(parseInt(valor[2]) * 2 / 1000)
             arr_Turbidez.push(valor[3])
@@ -142,6 +132,13 @@ function getDados(){
         
     });
 
+    document.getElementById("tds").innerHTML = valores[valores.length-1][2]
+    document.getElementById("turbidez").innerHTML = valores[valores.length-1][3]
+    document.getElementById("ph").innerHTML = valores[valores.length-1][4]
+    document.getElementById("tempAgua").innerHTML = valores[valores.length-1][5]
+
+    document.getElementById("condEletrica").innerHTML = parseInt(valores[valores.length-1][2]) * 2 /1000
+
     document.getElementById('horario').innerHTML = `Última atualização: ${ultimaAtualizacao}`
 
     atualizarGraficos()
@@ -149,8 +146,7 @@ function getDados(){
 }
 
 function atualizarGraficos(){
-    graficoTemperatura.data.datasets[0].data = arr_temperaturas
-    graficoTemperatura.data.datasets[1].data = arr_temperaturasDS
+    graficoTemperatura.data.datasets[0].data = arr_temperaturasDS
     graficoPH.data.datasets[0].data = arr_PH
     graficoCondutividade_TDS.data.datasets[0].data = arr_TDS
     graficoCondutividade_TDS.data.datasets[1].data = arr_Condutividade
@@ -166,7 +162,6 @@ getDados();
 
 setInterval(() => {
     labels.splice(0, labels.length)
-    arr_temperaturas.splice(0, arr_temperaturas.length)
     arr_TDS.splice(0, arr_TDS.length)
     arr_Condutividade.splice(0, arr_Condutividade.length)
     arr_Turbidez.splice(0, arr_Turbidez.length)
