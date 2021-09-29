@@ -1,3 +1,3 @@
 void  medeTemperatura(){
-   temperatura = temp.getTemp(); 
+ temperatura = temp.getTemp(); 
 }

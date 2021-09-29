@@ -1,10 +1,10 @@
-//Thermistor
+//Thermistor - Sensor de Temperatura
   #include <Thermistor.h>
   Thermistor temp(A0); 
   int temperatura;
   void medeTemperatura();
 
-//DS18B20
+//DS18B20 - Sensor de Temperatura
   #include <OneWire.h>
   #include <DallasTemperature.h>
   OneWire pino(6);
@@ -13,7 +13,7 @@
   float temperaturaDS;
   void medeTemperaturaDS();
 
-// TDS
+// TDS - Sensor de total de sólidos dissolvidos
   #include "GravityTDS.h"
   float tds = 0;
   GravityTDS gravityTDS;
@@ -33,10 +33,6 @@
   int medidas[10],aux;
   float PH;
   void medePH();
-    
-//Serial
-  void monitorSerial();
-
     
 //Envio pro ESP
   String textoEnvio;
@@ -62,8 +58,6 @@ void setup() {
 }
 void loop() {
   static unsigned long medidasAnterior;
-    
-    //monitorSerial();
     
   if(millis() - medidasAnterior > delayMedidas){
     enviarParaESP();

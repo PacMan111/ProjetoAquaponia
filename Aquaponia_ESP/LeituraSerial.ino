@@ -1,28 +1,21 @@
 void lerSerial(){
 
   static unsigned long leituraAnterior;
-
+  
   if(millis() - leituraAnterior > 1000){
     if (Serial.available()){
       textoRecebido = Serial.readStringUntil('\n');
     }
-
-    
-
+  
     if (textoRecebido != ""){
-    Serial.println(textoRecebido);
-    destrinchaSerial();  
+      Serial.println(textoRecebido);
+      destrinchaSerial();  
     }
     
     leituraAnterior = millis();
   }
   
 }
-
-
-
-// T-4C289.35D35.75Z3000.00P16.85
-
 
 void destrinchaSerial(){
 
@@ -38,14 +31,14 @@ void destrinchaSerial(){
 
   textoRecebido = "";
 
-  Serial.print("Temperatura: "); Serial.println(temperatura);
+  Serial.print("Temperatura: " + temperatura);
 
-  Serial.print("TDS: "); Serial.println(TDS);
+  Serial.print("TDS: " + TDS);
 
-  Serial.print("temperaturaDS: "); Serial.println(temperaturaDS);
+  Serial.print("temperaturaDS: " + temperaturaDS);
 
-  Serial.print("Turbidez: "); Serial.println(Turbidez);
+  Serial.print("Turbidez: " + Turbidez); 
 
-  Serial.print("PH: "); Serial.println(PH);
+  Serial.print("PH: " + PH); 
 
 }
