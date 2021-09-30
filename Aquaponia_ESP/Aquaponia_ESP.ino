@@ -9,8 +9,8 @@ String Turbidez;
 String PH;
 
 //WIFI
-String ssid       = "VIRUS";
-String password   = "6SCJ2013";
+String ssid       = "Nome da Rede";
+String password   = "Senha";
 int ContaFaltaWifi;
 
 void lerSerial();
